@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
+import {auth} from '../../firebase/util'
 
 
 export class admin extends Component {
@@ -16,17 +17,18 @@ export class admin extends Component {
       [e.target.name]: e.target.value
     });
   };
-  onSubmitHandler=(e)=>{
+  onSubmitHandler=async (e)=>{
       e.preventDefault()
       let {email,password}= this.state
     if(!(typeof email==="string" || typeof password==="string")){
         alert("Please fill the details")
     }
-    if(email==="admin@admin" && password==="admin"){
-        alert("Welcome Admin")
-    }
-    else{
-        alert("Wrong credentials")
+    try {
+        const user = await auth.signInWithEmailAndPassword(email,password)
+        this.setState({email:"",password:""})
+        console.log(user)
+    } catch (error) {
+        console.log(error)
     }
   }
   render() {
