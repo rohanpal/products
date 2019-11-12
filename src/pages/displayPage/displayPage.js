@@ -27,9 +27,9 @@ export class displayPage extends Component {
   render() {
     let displayData = (
       <div >
-        <GridList cellHeight={180} className="gridList">
-          <GridListTile key="Subheader" cols={5} style={{ height: "100" }}>
-            <ListSubheader component="div">Door Knobs</ListSubheader>
+        <GridList cellHeight={250} className="gridList" spacing={2}>
+          <GridListTile key="Subheader" cols={2} style={{ height: "100" }}>
+            <ListSubheader component="div"><h2>Door Knobs</h2></ListSubheader>
           </GridListTile>
           {this.state.collections.map(
             ({ SIZE, codeNo, itemType, material, picture }) => (
@@ -38,7 +38,7 @@ export class displayPage extends Component {
                 <GridListTileBar
                   title={itemType}
                   subtitle={<span>Material: {material}</span>}
-                  actionIcon={<CustomButton inverted>View Details</CustomButton >}
+                  actionIcon={<CustomButton inverted style={{width:"auto"}}>View Details</CustomButton >}
                 />
               </GridListTile>
             )

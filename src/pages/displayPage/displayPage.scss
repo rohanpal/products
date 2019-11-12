@@ -1,14 +1,11 @@
 .root {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   overflow: hidden;
-  
-  
 
   .gridList {
     width: 70%;
-    height: 650px;
+    height: 550px;
     background-color: #3333331a;
     
 
@@ -16,10 +13,14 @@
       height: 150px;
       width: auto;
       align-self: center;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      padding: 5px;
+      width: 150px;
     }
-    .tile{
-        border: 1px solid black;
-        padding: 10px 5px;
+    .tile {
+      border: 1px solid black;
+      
     }
   }
 }
