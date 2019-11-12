@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow: hidden;
+  
+  
+
+  .gridList {
+    width: 70%;
+    height: 650px;
+    background-color: #3333331a;
+    
+
+    .image {
+      height: 150px;
+      width: auto;
+      align-self: center;
+    }
+    .tile{
+        border: 1px solid black;
+        padding: 10px 5px;
+    }
+  }
+}

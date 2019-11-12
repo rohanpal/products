@@ -1,0 +1,19 @@
+.root{
+    width:100%;
+    height: 550px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .display{
+        width: 75%;
+        border: 1px solid greenyellow;
+    }
+
+    .admin-navigation{
+        width: 15%;
+        border: 2px solid chocolate;
+    }
+
+    
+}

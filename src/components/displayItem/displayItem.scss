@@ -1,16 +1,21 @@
 .display-item {
-  width: 22%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 350px;
   align-items: center;
   position: relative;
+  border: 1px solid black;
+  min-width: 250px;
+  margin-bottom: 35px;
+
 
   .image {
     width: 100%;
     height: 95%;
-    background-size: cover;
-    margin-bottom: 5px;
+    
+    margin-bottom:10px ;
+    
   }
 
   .custom-button {
@@ -33,7 +38,7 @@
 
   .footer {
     width: 100%;
-    height: 5%;
+    height: 10%;
     display: flex;
     justify-content: space-between;
     font-size: 18px;

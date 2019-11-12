@@ -5,12 +5,14 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import {auth} from '../../firebase/util'
+import {Redirect} from 'react-router-dom'
 
 
 export class admin extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error:null
   };
   onChangeHandler = e => {
     this.setState({
@@ -25,10 +27,10 @@ export class admin extends Component {
     }
     try {
         const user = await auth.signInWithEmailAndPassword(email,password)
-        this.setState({email:"",password:""})
-        console.log(user)
+        this.setState({email:"",password:"",error:null})
+        return this.props.history.push("/admin/dashboard")
     } catch (error) {
-        console.log(error)
+        this.setState({error:"Something went wrong"})
     }
   }
   render() {
@@ -58,6 +60,7 @@ export class admin extends Component {
           className="input-group"
         />
         <Button type="submit" className="button" variant="outlined" color="primary">Sign In</Button>
+        {this.state.error && <Typography variant="caption" color="error" style={{alignSelf:"center",marginTop:"8px"}}>{this.state.error}</Typography>}
       </form>
      </Container>
     );
