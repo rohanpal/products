@@ -7,12 +7,18 @@
 
     .display{
         width: 75%;
-        border: 1px solid greenyellow;
+        
+        color: black;
+    }
+
+    .select{
+        min-width: 100px;
     }
 
     .admin-navigation{
         width: 15%;
-        border: 2px solid chocolate;
+        align-self: center;
+        
     }
 
     

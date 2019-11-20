@@ -1,0 +1,28 @@
+.add{
+    padding: 35px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    
+    flex-direction: column;
+    
+    .heading{
+        align-self: center;
+    }
+
+    .form{
+        margin-top: 45px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .text-inputs{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        
+    }
+}

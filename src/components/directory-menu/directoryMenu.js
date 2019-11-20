@@ -7,35 +7,35 @@ import './directoryMenu.scss'
 
     state={
         categories:[{
-            title:"category1",
+            title:"handles",
             id:1,
-            imageUrl:"http://www.technomedsystems.in/img/slide-bg02.jpg"
+            imageUrl:"https://media.istockphoto.com/photos/open-the-modern-wooden-door-picture-id672475256?k=6&m=672475256&s=612x612&w=0&h=U3O4VZ1LFwTblgFSWbv9en6yg0m-14iKe3wohWTg3FI="
 
            
         },
         {
-            title:"category2",
+            title:"handles",
             id:2,
-            imageUrl:"http://www.technomedsystems.in/img/slide-bg02.jpg"
+            imageUrl:"https://media.istockphoto.com/photos/open-the-modern-wooden-door-picture-id672475256?k=6&m=672475256&s=612x612&w=0&h=U3O4VZ1LFwTblgFSWbv9en6yg0m-14iKe3wohWTg3FI="
 
            
         },{
-            title:"category3",
+            title:"handles",
             id:3,
-            imageUrl:"http://www.technomedsystems.in/img/slide-bg02.jpg"
+            imageUrl:"https://media.istockphoto.com/photos/open-the-modern-wooden-door-picture-id672475256?k=6&m=672475256&s=612x612&w=0&h=U3O4VZ1LFwTblgFSWbv9en6yg0m-14iKe3wohWTg3FI="
 
            
         },{
-            title:"category4",
+            title:"handles",
             id:4,
-            imageUrl:"http://www.technomedsystems.in/img/slide-bg02.jpg",
+            imageUrl:"https://media.istockphoto.com/photos/open-the-modern-wooden-door-picture-id672475256?k=6&m=672475256&s=612x612&w=0&h=U3O4VZ1LFwTblgFSWbv9en6yg0m-14iKe3wohWTg3FI=",
             size:"large"
 
            
         },{
-            title:"category5",
+            title:"handles",
             id:5,
-            imageUrl:"http://www.technomedsystems.in/img/slide-bg02.jpg",
+            imageUrl:"https://media.istockphoto.com/photos/open-the-modern-wooden-door-picture-id672475256?k=6&m=672475256&s=612x612&w=0&h=U3O4VZ1LFwTblgFSWbv9en6yg0m-14iKe3wohWTg3FI=",
             size:"large"
 
            

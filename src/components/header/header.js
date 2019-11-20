@@ -1,14 +1,16 @@
 import React from 'react'
-import {ReactComponent as Logo} from '../../assets/logo.svg'
+
 import {Link} from 'react-router-dom'
 import './header.scss'
+import Typography from '@material-ui/core/Typography';
+
 
 
 const header = () => {
     return (
         <div className="header">
             <Link className="logo-container" to="/">
-                <Logo className="logo"/>
+                <Typography variant="h5" >Company name</Typography>
             </Link>
             <div className="options">
                 <Link to="/shop" className="option">

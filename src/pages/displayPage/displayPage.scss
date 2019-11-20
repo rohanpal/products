@@ -2,10 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  height: 100%;
+  margin-bottom: 50px;
 
   .gridList {
     width: 70%;
-    height: 550px;
+    height: 650px;
     background-color: #3333331a;
     
 

@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import {auth} from '../../firebase/util'
-import {Redirect} from 'react-router-dom'
+
 
 
 export class admin extends Component {

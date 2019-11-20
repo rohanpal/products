@@ -1,0 +1,14 @@
+.footer{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    padding: 35px;
+    background-color:#45494D;
+    color: white;
+    padding-top: 30px;
+
+    .about-us{
+        max-width: 300px;
+    }
+}
