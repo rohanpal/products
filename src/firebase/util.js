@@ -31,10 +31,10 @@ export const getProducts = async product => {
         throw new Error("Product type does not exist");
       }
     } else {
-      throw new Error("Something went wrogn");
+      throw new Error("Product does not exist");
     }
   } catch (error) {
-    console.log(error)
+    
     return null;
   }
 };

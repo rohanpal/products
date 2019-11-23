@@ -70,10 +70,3 @@ export class displayPage extends Component {
 }
 
 export default displayPage;
-
-// SIZE: "4.5"
-// SNO: "1"
-// codeNo: "1351"
-// itemType: "DOOR KNOCKER"
-// material: "IRON"
-// picture: "https://firebasestorage.goog

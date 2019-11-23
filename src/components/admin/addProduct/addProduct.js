@@ -7,20 +7,31 @@ import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import { storage, getProducts } from "../../../firebase/util";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import {fireStore} from '../../../firebase/util'
+
 
 export default class addProduct extends Component {
   state = {
     productType: "",
     open: false,
-    image: null
+    image: null,
+    imageUploading: false,
+    codeNo: "",
+    material: "",
+    size: "",
+    finish: "",
+    picture: ""
   };
+  dataRetrived = [];
   handleDropDownChange = async event => {
-    this.setState({ productType: event.target.value });
     try {
       const data = await getProducts(event.target.value);
-      console.log(data);
+      this.dataRetrived = data;
+      console.log(data)
+      this.setState({ productType: event.target.value });
     } catch (error) {
-      alert("Something went wrong");
+      alert("Something went wrong try again");
     }
   };
   handleClose = () => {
@@ -30,20 +41,23 @@ export default class addProduct extends Component {
     this.setState({ open: true });
   };
   handleImageUpload = () => {
+    this.setState({ imageUploading: true });
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
       null,
       error => {
-        alert("Something went wrong");
+        this.setState({ imageUploading: false });
+        alert("Please try again");
       },
       () => {
         storage
           .ref("images")
           .child(image.name)
           .getDownloadURL()
-          .then(url => console.log(url));
+          .then(url => this.setState({ picture: url }));
+        this.setState({ imageUploading: false });
         alert("Image uploaded");
       }
     );
@@ -55,16 +69,50 @@ export default class addProduct extends Component {
       this.setState({ image });
     }
   };
-  handleChange =(event)=>{
-    this.setState({[event.target.name]:event.target.value})
-  }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  onSubmitHandler = async (event) => {
+    event.preventDefault();
+    const { codeNo, size, finish, picture, material } = this.state;
+    if (
+      !codeNo ||
+      !size ||
+      !finish ||
+      !picture ||
+      !material ||
+      !this.dataRetrived
+    ) {
+      alert("Please check and fill all the details");
+      return
+    }
+    let sNo = (parseInt(this.dataRetrived[this.dataRetrived.length-1]["sNo"])+1).toString()
+    const updatedProducts = [
+      ...this.dataRetrived,
+      { sNo,codeNo, size, finish, picture, material, size }
+    ];
+
+   try{
+     const stringData = JSON.stringify(updatedProducts)
+    await fireStore.doc(`/categories/${this.state.productType}`).set({data:stringData})
+    console.log("Added")
+   }
+   catch(e){
+     console.log(e)
+     alert("Couldn't upload please try again")
+   }
+   
+
+    
+  };
+
   render() {
     return (
       <div className="add">
         <Typography variant="h5" className="heading">
           Add Products
         </Typography>
-        <form className="form">
+        <form className="form" onSubmit={this.onSubmitHandler}>
           <div>
             <InputLabel id="demo-mutiple-name-label">
               Product Category
@@ -97,13 +145,17 @@ export default class addProduct extends Component {
               />
             </span>
             <span>
-              <Button
-                variant="contained"
-                disabled={!this.state.image}
-                onClick={this.handleImageUpload}
-              >
-                Upload
-              </Button>
+              {this.state.imageUploading ? (
+                <CircularProgress color="secondary" />
+              ) : (
+                <Button
+                  variant="contained"
+                  disabled={!this.state.image}
+                  onClick={this.handleImageUpload}
+                >
+                  Upload
+                </Button>
+              )}
             </span>
           </div>
           <div className="text-inputs">
@@ -113,6 +165,9 @@ export default class addProduct extends Component {
               helperText="Mandatory."
               margin="normal"
               variant="outlined"
+              name="codeNo"
+              onChange={this.handleChange}
+              required
             />
             <TextField
               id="outlined-error-helper-text"
@@ -120,6 +175,9 @@ export default class addProduct extends Component {
               helperText="Mandatory."
               margin="normal"
               variant="outlined"
+              name="material"
+              onChange={this.handleChange}
+              required
             />
             <TextField
               id="outlined-error-helper-text"
@@ -127,6 +185,9 @@ export default class addProduct extends Component {
               helperText="Mandatory."
               margin="normal"
               variant="outlined"
+              name="size"
+              onChange={this.handleChange}
+              required
             />
             <TextField
               id="outlined-error-helper-text"
@@ -134,8 +195,12 @@ export default class addProduct extends Component {
               helperText="Mandatory."
               margin="normal"
               variant="outlined"
+              name="finish"
+              onChange={this.handleChange}
+              required
             />
           </div>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     );

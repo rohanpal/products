@@ -8,7 +8,8 @@ import Admin from './pages/admin/admin'
 import {Route,Switch} from 'react-router-dom'
 import Footer from './components/footer/footer'
 
-function App() {
+function App(props) {
+  console.log(props)
   return (
     <div >
       <Header/>
@@ -19,7 +20,7 @@ function App() {
       <Route  path="/admin/dashboard" component={Dashboard}/>
       
       </Switch>
-      <Footer/>
+      
     </div>
   );
 }
