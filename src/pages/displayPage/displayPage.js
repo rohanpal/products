@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import displayData from "./displayData";
-import DisplayPreview from "../../components/displayPreview/displayPreview";
-import DisplayItem from "../../components/displayItem/displayItem";
-import { fireStore } from "../../firebase/util";
+
 import "./displayPage.scss";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import CustomButton from "../../components/customButton/customButton";
 import { getProducts } from "../../firebase/util";
+import Navigation from "../../components/admin/navigation/navigation";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import { borderRadius } from "@material-ui/system";
 
 export class displayPage extends Component {
   state = {
@@ -21,7 +23,7 @@ export class displayPage extends Component {
     try {
       const data = await getProducts("Door_Knockers");
       if (data) {
-        this.setState({ collections: data, loading: false,error:false });
+        this.setState({ collections: data, loading: false, error: false });
       } else {
         this.setState({ loading: false, error: true });
       }
@@ -32,30 +34,52 @@ export class displayPage extends Component {
   render() {
     let displayData =
       this.state.collections && !this.state.error ? (
-        <div>
-          <GridList cellHeight={250} className="gridList" spacing={2}>
-            <GridListTile key="Subheader" cols={2} style={{ height: "80" }}>
-              <ListSubheader component="div">
-                <h2>Door Knobs</h2>
-              </ListSubheader>
-            </GridListTile>
-            {this.state.collections.map(
-              ({ SIZE, codeNo, itemType, material, picture }) => (
-                <GridListTile key={picture} className="tile">
-                  <img src={picture} alt={itemType} className="image" />
-                  <GridListTileBar
+        <div className="product-list">
+          {this.state.collections.map(
+            ({ SIZE, codeNo, itemType, material, picture }) => (
+              <Card className="card">
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="Contemplative Reptile"
+                    height="140"
+                    image={picture}
                     title={itemType}
-                    subtitle={<span>Material: {material}</span>}
-                    actionIcon={
-                      <CustomButton inverted style={{ width: "50" }}>
-                        View Details
-                      </CustomButton>
-                    }
+                    style={{
+                      minWidth: "80px",
+                      alignSelf: "center",
+                      objectFit: "contain",
+                      
+                      maxWidth: "100px",
+                      borderRadius: "50%",
+                      maxHeight:'150px',
+                      padding:'2'
+                    }}
                   />
-                </GridListTile>
-              )
-            )}
-          </GridList>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {itemType}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {`Size available- ${SIZE}`}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    More
+                  </Button>
+                  <Button size="small" color="primary">
+                    Learn More
+                  </Button>
+                </CardActions>
+              </Card>
+            )
+          )}
         </div>
       ) : (
         <h1>Check your internet connectivity and refresh the page</h1>
@@ -63,10 +87,17 @@ export class displayPage extends Component {
 
     return (
       <div className="root">
-        {!this.state.loading ? displayData : <h1>Loading</h1>}
+        <div className="products">
+          {!this.state.loading ? displayData : <h1>Loading</h1>}
+        </div>
+        <div className="navigation">
+        <Navigation/>
+        </div>
       </div>
     );
   }
 }
 
 export default displayPage;
+
+//{ SIZE, codeNo, itemType, material, picture }

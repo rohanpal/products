@@ -1,29 +1,26 @@
 .root {
   display: flex;
-  flex-wrap: wrap;
-  height: 100%;
-  margin-bottom: 50px;
-  
-  .gridList {
-    
-    width: 70%;
-    height: 580px;
-    background-color: #3333331a;
-    overflow-x: hidden;
-    
 
-    .tile {
-      border: 1px solid orange;
+  .products {
+    width: 75%;
 
-      .image {
-        height: 150px;
-        width: auto;
-        align-self: center;
-        border: 1px solid #ddd;
-        border-radius: 50%;
-        padding: 5px;
-        width: 150px;
+    .product-list {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      overflow-x: hidden;
+      height: 580px;
+      
+
+      .card {
+        min-width: 210px;
+        margin: 12px;
+        min-height: 280px;
+        max-width: 220px;
       }
     }
+  }
+  .navigation {
+    text-align: center;
   }
 }
