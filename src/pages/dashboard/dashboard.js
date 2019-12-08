@@ -1,11 +1,14 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch,Redirect } from "react-router-dom";
 import AdminNavigation from "../../components/admin/navigation/navigation";
 import "./dashboard.scss";
 import AddProduct from '../../components/admin/addProduct/addProduct'
 
 const dashboard = props => {
-  console.log(props);
+  if(!localStorage.getItem("userId")){
+    return <Redirect to="/"/>
+  }
+  
   return (
     <div className="root">
       <div className="display">

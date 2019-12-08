@@ -5,41 +5,26 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
 
-const navigation = ({ type }) => {
-  return type === "categories" ? 
-    (
-        <List component="nav" className="nav">
-          <ListItem button>
-            <Link to="/shop">
-              <ListItemText primary="Door Knockers" />
+const navigation = ({ type,setProduct }) => {
+  const productCategories = [
+    "Coat_Hook",
+    "Door_Knockers",
+    "Drawer_Pull",
+    "Data_Handler"
+  ];
+  return type === "categories" ? (
+    <List component="nav" className="nav">
+      {productCategories.map(productCategory => (
+        <>
+          <ListItem button onClick={()=>setProduct(productCategory)}>
+            <Link to={`/shop/${productCategory}`}>
+              <ListItemText primary={productCategory} />
             </Link>
           </ListItem>
           <Divider />
-          <ListItem button>
-            <Link to="/shop">
-              <ListItemText primary="Knobs" />
-            </Link>
-          </ListItem>
-          <Divider />
-          <ListItem button>
-          <Link to="/shop">
-              <ListItemText primary="Knobs" />
-            </Link>
-          </ListItem>
-          <Divider />
-          <ListItem button>
-          <Link to="/shop">
-              <ListItemText primary="Knobs" />
-            </Link>
-          </ListItem>
-          <Divider />
-          <ListItem button>
-          <Link to="/shop">
-              <ListItemText primary="Knobs" />
-            </Link>
-          </ListItem>
-          <Divider />
-        </List>
+        </>
+      ))}
+    </List>
   ) : (
     <List component="nav" className="nav">
       <ListItem button>

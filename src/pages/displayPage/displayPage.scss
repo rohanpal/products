@@ -1,8 +1,10 @@
 .root {
   display: flex;
-
+  justify-content: center;
   .products {
     width: 75%;
+    display: flex;
+    justify-content: center;
 
     .product-list {
       display: flex;
@@ -10,7 +12,6 @@
       flex-wrap: wrap;
       overflow-x: hidden;
       height: 580px;
-      
 
       .card {
         min-width: 210px;
@@ -20,6 +21,10 @@
       }
     }
   }
+  .progress {
+    align-self: center;
+  }
+
   .navigation {
     text-align: center;
   }

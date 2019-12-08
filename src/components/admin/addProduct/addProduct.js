@@ -94,8 +94,8 @@ export default class addProduct extends Component {
 
    try{
      const stringData = JSON.stringify(updatedProducts)
-    await fireStore.doc(`/categories/${this.state.productType}`).set({data:stringData})
-    console.log("Added")
+    const res = await fireStore.doc(`/categories/${this.state.productType}`).set({data:stringData})
+    console.log(res)
    }
    catch(e){
      console.log(e)

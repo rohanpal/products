@@ -17,11 +17,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
-export const fireStore = firebase.firestore();
+export const fireStore = firebase.firestore()
+
 export const storage = firebase.storage();
+
 
 export const getProducts = async product => {
   try {
+    
     if (product) {
       const products = await fireStore.doc(`/categories/${product}`).get();
       if (products.exists) {
@@ -34,7 +37,7 @@ export const getProducts = async product => {
       throw new Error("Product does not exist");
     }
   } catch (error) {
-    
+    console.log(error)
     return null;
   }
 };
