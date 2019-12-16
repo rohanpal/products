@@ -132,7 +132,8 @@ export default class addProduct extends Component {
               </MenuItem>
               <MenuItem value={"Coat_Hook"}>Coat Hook</MenuItem>
               <MenuItem value={"Door_Knockers"}>Door Knockers</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={"Data_Handler"}>Data Handlers</MenuItem>
+              <MenuItem value={"Drawer_Pull"}>Drawer Pull</MenuItem>
             </Select>
           </div>
           <div className="image-upload">

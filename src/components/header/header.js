@@ -1,31 +1,46 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
+import { Link } from "react-router-dom";
+import "./header.scss";
+import Typography from "@material-ui/core/Typography";
+import { auth } from "../../firebase/util";
 
-import {Link} from 'react-router-dom'
-import './header.scss'
-import Typography from '@material-ui/core/Typography';
+const Header = () => {
+  const { authenticated, setAuthenticated } = useContext(UserContext);
+  console.log(authenticated);
+  return (
+    <div className="header">
+      <Link className="logo-container" to="/">
+        <Typography variant="h5">Company name</Typography>
+      </Link>
+      <div className="options">
+        <Link to="/shop" className="option">
+          Shop
+        </Link>
 
+        <Link to="/contact" className="option">
+          Contact
+        </Link>
+        {authenticated ? (
+          <Link
+            className="option"
+            onClick={async () => {
+              await auth.signOut()
+              localStorage.clear("userId");
+              setAuthenticated(false);
+            }}
+          >
+            Logout
+          </Link>
+        ) : (
+          null
+        )}
+        <Link to={authenticated?'/admin/dahboard':'/admin'} className="option">
+            Admin
+          </Link>
+      </div>
+    </div>
+  );
+};
 
-
-const header = () => {
-    return (
-        <div className="header">
-            <Link className="logo-container" to="/">
-                <Typography variant="h5" >Company name</Typography>
-            </Link>
-            <div className="options">
-                <Link to="/shop" className="option">
-                    Shop
-                </Link>
-                <Link to="/admin" className="option">
-                    Admin
-                </Link>
-                <Link to="/contact" className="option">
-                    Contact
-                </Link>
-
-            </div>
-        </div>
-    )
-}
-
-export default header
+export default Header;

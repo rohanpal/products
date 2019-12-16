@@ -17,28 +17,42 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
-export const fireStore = firebase.firestore()
+export const fireStore = firebase.firestore();
 
 export const storage = firebase.storage();
 
-
 export const getProducts = async product => {
   try {
-    
-    if (product) {
-      const products = await fireStore.doc(`/categories/${product}`).get();
-      if (products.exists) {
-        const data = await JSON.parse(products.data().data);
-        return data;
-      } else {
-        throw new Error("Product type does not exist");
-      }
+    if (
+      !["Coat_Hook", "Door_Knockers", "Drawer_Pull", "Data_Handler"].includes(
+        product
+      )
+    ) {
+      throw new Error("Product category does not exists");
+    }
+
+    const products = await fireStore.doc(`/categories/${product}`).get();
+    if (products.exists) {
+      const data = await JSON.parse(products.data().data);
+      return data;
     } else {
-      throw new Error("Product does not exist");
+      throw new Error("Product type does not exist");
     }
   } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong please try again");
+  }
+};
+
+export const updateProducts = async (productType, updatedProducts) => {
+  try {
+    const updatedProductsInString =await JSON.stringify(updatedProducts)
+    const res = await fireStore.doc(`/categories/${productType}`).set({data:updatedProductsInString})
+    console.log(res)
+    return updatedProducts
+  } catch (error) {
     console.log(error)
-    return null;
+    throw new Error("Could not update")
   }
 };
 

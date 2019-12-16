@@ -3,7 +3,7 @@ import { Route, Switch,Redirect } from "react-router-dom";
 import AdminNavigation from "../../components/admin/navigation/navigation";
 import "./dashboard.scss";
 import AddProduct from '../../components/admin/addProduct/addProduct'
-
+import AllProducts from  "../../components/admin/allProducts/allProducts"
 const dashboard = props => {
   if(!localStorage.getItem("userId")){
     return <Redirect to="/"/>
@@ -17,7 +17,7 @@ const dashboard = props => {
           <Route
             path={`${props.match.url}/home`}
             
-            component={() => <h1 style={{ color: "black" }}>Home</h1>}
+            component={(props) => <AllProducts {...props}/>}
           />
         </Switch>
       </div>

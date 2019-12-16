@@ -28,24 +28,26 @@ export class displayPage extends PureComponent {
       if (data) {
         this.setState({ collections: data, loading: false, error: false });
       } else {
-        this.setState({ loading: false, error: true });
+        this.setState({ loading: false, error: "Could not find products " });
       }
     } catch (error) {
-      alert("Check your internet connection");
+      console.log(error)
+      this.setState({ loading: false, error: true });
     }
   }
   async componentDidUpdate(prevProps, prevState) {
     if (prevState.product !== this.state.product) {
       try {
         const data = await getProducts(this.state.product);
-        console.log(data);
+
         if (data) {
           this.setState({ collections: data, loading: false, error: false });
         } else {
           this.setState({ loading: false, error: true });
         }
       } catch (error) {
-        alert("Check your internet connection");
+        
+        this.setState({ loading: false, error: true });
       }
     }
   }
@@ -53,7 +55,7 @@ export class displayPage extends PureComponent {
     this.setState({ product, loading: true });
   };
   render() {
-    console.log(this.props);
+    
     let displayData =
       this.state.collections && !this.state.error ? (
         <div className="product-list">
@@ -104,7 +106,7 @@ export class displayPage extends PureComponent {
           )}
         </div>
       ) : (
-        <h1>Check your internet connectivity and refresh the page</h1>
+  <h1>Something went wrong please try again</h1>
       );
 
     return (

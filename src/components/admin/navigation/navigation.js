@@ -40,15 +40,20 @@ const navigation = ({ type,setProduct }) => {
       </ListItem>
       <Divider />
       <ListItem button>
-        <ListItemText primary="Acount" />
+        <Link to="/admin/dashboard/home">
+          <ListItemText primary="Delete Product" />
+        </Link>
       </ListItem>
       <Divider />
       <ListItem button>
-        <ListItemText primary="Acount" />
+        <Link to="/admin/dashboard/add">
+          <ListItemText primary="Add Product" />
+        </Link>
       </ListItem>
-      <Divider />
       <ListItem button>
-        <ListItemText primary="Acount" />
+        <Link to="/admin/dashboard/add">
+          <ListItemText primary="Add Product" />
+        </Link>
       </ListItem>
       <Divider />
     </List>
