@@ -35,7 +35,7 @@ const AllProducts = props => {
   const [picture, setpicture] = useState("");
   const [sNo, setsNo] = useState("");
 
-  const data = [];
+  //const data = [];
 
   const handleDialogOpen = () => {
     setDialogOpen(true);
@@ -73,7 +73,7 @@ const AllProducts = props => {
   };
 
   useEffect(() => {
-    const Fetch = async () => {
+    const Fetch =  () => {
       fetchProduct();
     };
     Fetch();
@@ -85,9 +85,9 @@ const AllProducts = props => {
     setOpen(true);
   };
 
-  const handleEdit = () => {
-    setDialogOpen(true);
-  };
+  // const handleEdit = () => {
+  //   setDialogOpen(true);
+  // };
 
   const onCardClickHandler = (
     size,
@@ -142,7 +142,7 @@ const AllProducts = props => {
         
       }
       else{
-        window.alert("Something wenet wrong")
+        window.alert("Something went wrong")
       }
       setAlert(false);
     } catch (error) {
@@ -157,16 +157,7 @@ const AllProducts = props => {
           ({ size, codeNo, itemType, material, picture, sNo }) => (
             <Card
               className="card"
-              onClick={() =>
-                onCardClickHandler(
-                  size,
-                  codeNo,
-                  itemType,
-                  material,
-                  picture,
-                  sNo
-                )
-              }
+              
               key={sNo}
             >
               <CardActionArea>
@@ -201,7 +192,19 @@ const AllProducts = props => {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary" onClick={handleEdit}>
+                <Button size="small" color="primary" onClick={()=>{
+                  
+                    onCardClickHandler(
+                      size,
+                      codeNo,
+                      itemType,
+                      material,
+                      picture,
+                      sNo
+                    )
+                    setDialogOpen(true)
+                  
+                }}>
                   Edit
                 </Button>
                 <Button size="small" color="primary" onClick={handleAlertOpen}>

@@ -56,4 +56,25 @@ export const updateProducts = async (productType, updatedProducts) => {
   }
 };
 
+export const addQuestion = async (questionDetails)=>{
+  try {
+    const {question,productCode}= questionDetails
+    if(!question || !productCode){
+      return
+    }
+    const newquestion = await fireStore.collection("question").add({
+      question:question,
+      email:questionDetails.email,
+      contact:questionDetails.number || "NA",
+      productCode:productCode
+      
+    })
+    console.log(newquestion)
+  } catch (error) {
+    console.log(error)
+    throw new Error("Could not update")
+  }
+}
+
+
 export default firebase;

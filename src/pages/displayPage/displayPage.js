@@ -11,27 +11,52 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import ContactForm from "../../components/contact/contact";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 export class displayPage extends PureComponent {
   state = {
     collections: [],
     product: "Door_Knockers",
     loading: true,
-    error: false
+    error: false,
+    dialogOpen: false,
+    size: "",
+    codeNo: "",
+    itemType: "",
+    material: "",
+    picture: "",
+    isOpen: false
+  };
+  handleDialogOpen = () => {
+    this.setState({ dialogOpen: true });
+  };
+
+  handleDialogClose = () => {
+    this.setState({ dialogOpen: false });
+  };
+  handleQustionOpen = () => {
+    this.setState({ isOpen: true });
+  };
+  handleQustionClose = () => {
+    this.setState({ isOpen: false });
   };
   async componentDidMount() {
     try {
       const data = await getProducts(
         this.props.match.params.product || this.state.product
       );
-      console.log(data);
+      //console.log(data);
       if (data) {
         this.setState({ collections: data, loading: false, error: false });
       } else {
         this.setState({ loading: false, error: "Could not find products " });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       this.setState({ loading: false, error: true });
     }
   }
@@ -46,7 +71,6 @@ export class displayPage extends PureComponent {
           this.setState({ loading: false, error: true });
         }
       } catch (error) {
-        
         this.setState({ loading: false, error: true });
       }
     }
@@ -55,12 +79,11 @@ export class displayPage extends PureComponent {
     this.setState({ product, loading: true });
   };
   render() {
-    
     let displayData =
       this.state.collections && !this.state.error ? (
         <div className="product-list">
           {this.state.collections.map(
-            ({ SIZE, codeNo, itemType, material, picture }) => (
+            ({ size, codeNo, itemType, material, picture }) => (
               <Card className="card">
                 <CardActionArea>
                   <CardMedia
@@ -89,16 +112,32 @@ export class displayPage extends PureComponent {
                       color="textSecondary"
                       component="p"
                     >
-                      {`Size available- ${SIZE}`}
+                      {`Size available- ${size}`}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
+                <CardActions
+                  onClick={
+                    () =>
+                      this.setState({
+                        size,
+                        codeNo,
+                        itemType,
+                        material,
+                        picture
+                      })
+                    //console.log(size, codeNo, itemType, material, picture)
+                  }
+                >
+                  <Button size="small" color="primary" onClick={()=>this.setState({dialogOpen:true})}>
                     More
                   </Button>
-                  <Button size="small" color="primary">
-                    Learn More
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={()=>this.setState({ isOpen: true })}
+                  >
+                    Ask
                   </Button>
                 </CardActions>
               </Card>
@@ -106,11 +145,42 @@ export class displayPage extends PureComponent {
           )}
         </div>
       ) : (
-  <h1>Something went wrong please try again</h1>
+        <h1>Something went wrong please try again</h1>
       );
 
     return (
       <div className="root">
+        <ContactForm
+          productCode={this.state.codeNo}
+          open={this.state.isOpen}
+          closeHandler={this.handleQustionClose}
+          openHandler={this.handleQustionOpen}
+        />
+        <Dialog
+          open={this.state.dialogOpen}
+          onClose={this.handleDialogOpen}
+          aria-labelledby="Product details"
+        >
+          <DialogTitle id="Product data">Product details</DialogTitle>
+          <DialogContent>
+            <Typography>SIZE :{this.state.size}</Typography>
+          </DialogContent>
+          <DialogContent>
+            <Typography>Code Number :{this.state.codeNo}</Typography>
+          </DialogContent>
+          <DialogContent>
+            <Typography>Item Type :{this.state.itemType}</Typography>
+          </DialogContent>
+          <DialogContent>
+            <Typography>Material :{this.state.material}</Typography>
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={this.handleDialogClose} color="primary">
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
         <div className="products">
           {!this.state.loading ? (
             displayData

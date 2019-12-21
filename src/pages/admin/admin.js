@@ -30,11 +30,10 @@ const Admin = props => {
       const user = await auth.signInWithEmailAndPassword(email, password);
       
 
-      localStorage.setItem("userId", user.user.uid);
-      resetEmail();
-      setError("");
-      resetPassword();
-      setAuthenticated(true);
+     
+      
+      
+      
       
       return props.history.push("/admin/dashboard");
     } catch (error) {

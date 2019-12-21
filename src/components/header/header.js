@@ -6,8 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import { auth } from "../../firebase/util";
 
 const Header = () => {
-  const { authenticated, setAuthenticated } = useContext(UserContext);
-  console.log(authenticated);
+  const { authenticated } = useContext(UserContext);
+  console.log(authenticated,"rendering");
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -27,7 +27,7 @@ const Header = () => {
             onClick={async () => {
               await auth.signOut()
               localStorage.clear("userId");
-              setAuthenticated(false);
+              
             }}
           >
             Logout
